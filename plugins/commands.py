@@ -41,15 +41,7 @@ async def start(client, message):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
     if len(message.command) != 2:
-        buttons = [[
-            InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-            ],[
-            InlineKeyboardButton('🔍 Search', switch_inline_query_current_chat=''),
-            InlineKeyboardButton('🤖 Updates', url='https://t.me/TeamEvamaria')
-            ],[
-            InlineKeyboardButton('ℹ️ Help', callback_data='help'),
-            InlineKeyboardButton('😊 About', callback_data='about')
-        ]]
+        buttons = [[ InlineKeyboardButton('🗑 Close', callback_data='close_data')]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
             photo=random.choice(PICS),
@@ -67,7 +59,7 @@ async def start(client, message):
         btn = [
             [
                 InlineKeyboardButton(
-                    "🤖 Join Updates Channel", url=invite_link.invite_link
+                    "♻️ JOIN CHANNEL ♻️", url=invite_link.invite_link
                 )
             ]
         ]
@@ -78,7 +70,7 @@ async def start(client, message):
             btn.append([InlineKeyboardButton(" 🔄 Try Again", callback_data=f"{pre}#{file_id}")])
         await client.send_message(
             chat_id=message.from_user.id,
-            text="**Please Join My Updates Channel to use this Bot!**",
+            text="നിങ്ങൾക്ക് ഈ ബോട്ട് വഴി സിനിമ ലഭിക്കണമെങ്കിൽ താഴെ കാണുന്ന '♻️ JOIN CHANNEL ♻️' എന്ന ബട്ടൺ ക്ലിക്ക് ചെയ്ത് ഞങ്ങളുടെ ചാനലിൽ ജോയിൻ ചെയ്ത ശേഷം  'Try again' എന്ന ബട്ടൻ ക്ലിക്ക് ചെയ്യുക",
             reply_markup=InlineKeyboardMarkup(btn),
             parse_mode="markdown"
             )
